@@ -2,6 +2,29 @@
 
 With the web ecosystem steadily moving towards Javascript and React, let's talk about GraphQL as an easier way to make WP Rest API queries. During this session, we will discuss how to pull, sort, organize and optimize your content from WordPress to React using GraphQL, the data query language developed by Facebook.
 
+- [Make your WordPress Rest API queries easy with GraphQL and Gatsby](#make-your-wordpress-rest-api-queries-easy-with-graphql-and-gatsby)
+  - [Requirements](#requirements)
+  - [WordPress](#wordpress)
+  - [Install the Gatsby](#install-the-gatsby)
+    - [Let's explore quickly what is installed](#lets-explore-quickly-what-is-installed)
+      - [Folders](#folders)
+      - [Files](#files)
+  - [Link WordPress to Gatsby](#link-wordpress-to-gatsby)
+    - [Extra usefull plugins](#extra-usefull-plugins)
+    - [Query your data with GraphQL](#query-your-data-with-graphql)
+      - [Query all posts and pages](#query-all-posts-and-pages)
+  - [Display all posts to the front-end](#display-all-posts-to-the-front-end)
+        - [Let's explain what we did](#lets-explain-what-we-did)
+    - [A few usefull arguments than you can apply to your query](#a-few-usefull-arguments-than-you-can-apply-to-your-query)
+      - [Sort](#sort)
+        - [With one field](#with-one-field)
+        - [With one field](#with-one-field-1)
+      - [Limit](#limit)
+      - [Skip](#skip)
+      - [Filter](#filter)
+  - [Reusable query](#reusable-query)
+
+
 ## Requirements
 
 - [Install NodeJS and NPM](https://nodejs.org/en/)
