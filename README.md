@@ -34,7 +34,8 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
   > Simple bash script to manage multiple active node.js versions. — NVM, Github
 
-  Once it's installed, you can install the wanted NodeJS version and use it like this:
+  Once it's installed, you may have to restart your terminal.
+  You can install the wanted NodeJS version and use it like this:
 
   ```sh
   nvm install 10.16.0
@@ -67,13 +68,13 @@ First, do:
 npm install -g gatsby-cli
 ```
 
-Then, to generate the website, do:
+Then, to generate the website, choose your location then do:
 
 ```sh
 gatsby new workshop-wordpress-gatsby-react
 ```
 
-Then, move to this directories
+Then, move to this directory
 
 ```sh
 cd workshop-wordpress-gatsby-react
@@ -96,8 +97,8 @@ And now, your website will be available to [http://localhost:8000/](http://local
 
 - **.cache/**: This folder is an internal cache created automatically by Gatsby. The files inside this folder are not meant for modification. Should be added to the .gitignore file if not added already.
 - **node_modules/**: All modules installed by the package.json file. This folder is ignored by git.
-- **public/**: This folder is the build directory. He is also ignored by git.
-- **src/**: Here is where the magic happens. You will find inside everything you need to build the website. =>
+- **public/**: This folder is the build directory. It is also ignored by git.
+- **src/**: Here is where the magic happens. You will find everything you need to build the website inside  this folder. =>
 
 ![Gatsby src folders](/assets/gatsby-src-folders.png)
 
@@ -116,14 +117,14 @@ And now, your website will be available to [http://localhost:8000/](http://local
 
 ## Link WordPress to Gatsby
 
-For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/)**. It's very simple, just do the installation by this simple command line:
+For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/)**. It's very simple, open a new terminal window and just do the installation by this simple command line:
 (The **--save** tag means that a new line with the plugin slug and his version will be added to the package.json file)
 
 ```sh
 npm install --save gatsby-source-wordpress
 ```
 
-Once you've installed the plugin, open **gatsby-config.js** and paste the following code (it's part for the documentation but with only what we need):
+Once you've installed the plugin, open **gatsby-config.js** and paste the following code in the plugins array (it's part for the documentation but with only what we need):
 
     {
       resolve: "gatsby-source-wordpress",
@@ -215,11 +216,11 @@ Basically, to query contents from WordPress, it would be very similar to:
 
 where ***${Manufacturer}*** is the endpoint prefix and ***${Endpoint}*** is the name of the endpoint from the WordPress URL:
 
-`https://my-wordpress.com/wp-json/${Manufacturer}/v2/${Endpoint}`
+`https://wcpboston.eelab.space/wp-json/${Manufacturer}/v2/${Endpoint}`
 
 So, for instance, for all posts, url will be:
 
-`https://my-wordpress.com/wp-json/wp/v2/posts`
+`https://wcpboston.eelab.space/wp-json/wp/v2/posts`
 
 and the GraphQL will be:
 
@@ -236,9 +237,9 @@ and the GraphQL will be:
       }
     }
 
-Is almost exactly the same for pages, except that the ***${Endpoint}*** is different:
+It's almost exactly the same for pages, except that the ***${Endpoint}*** is different:
 
-`https://my-wordpress.com/wp-json/wp/v2/pages`
+`https://wcpboston.eelab.space/wp-json/wp/v2/pages`
 
 and the GraphQL will be:
 
@@ -264,7 +265,7 @@ Doing that, you should have this result on the right:
 
 TODO: Display a result with the proper WORDPRESS
 
-If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar**.
+If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar** on Windows.
 
 All of that is nice, but how are we implement that for the front-end. It's now ReactJS time!
 
@@ -291,7 +292,7 @@ If you server is still running, it should have compiled and you should be able t
 
 If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
 
-Let's know display all posts title and his content! To do so, it's very simple. You first need to import **graphql** from gatsby at the top of your file:
+Let's now display all posts title and his content! To do so, it's very simple. You first need to import **graphql** from gatsby at the top of your file:
 
 `import { graphql } from 'gatsby'`
 
@@ -313,14 +314,21 @@ Then after your function, you just need to export a variable who contains the gr
 
 And finally, you can update your function to display the content. Because GraphQL returns us an array, we will have to loop throught it:
 
-    {props.data.allWordpressPost.edges.map(({node}) => {
+    export default (props) => {
       return (
-        <div key={node.id}>
-          <h2>{node.title}</h2>
-          <p>{node.content}</p>
-        </div>
+        <Layout>
+          <h1>Posts page</h1>
+          {props.data.allWordpressPost.edges.map(({node}) => {
+            return (
+              <div key={node.id}>
+                <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
+                <p dangerouslySetInnerHTML={{ __html: node.content }} />
+              </div>
+            )`
+          })}
+        </Layout>
       )
-    })}
+    }
 
 ##### Let's explain what we did
 
@@ -397,7 +405,7 @@ Your data are now order by ***DESC*** insteand of ***ASC***. -->
 Your data are now order by the field ***title*** and by ***DESC***.
 Note that [] around the field name are optionnal when there is only one field.
 
-##### With one field
+##### With multiple fields
 
     export const query = graphql`
       query {
@@ -478,8 +486,9 @@ Here is the list (part of the documentation):
 - **lte**: short for **less than or equal**, must be less than or equal to given value
 - **elemMatch**: short for **element match**, this indicates that the field you are filtering will return an array of elements, on which you can apply a filter using the previous operators
 
-For instance, let's filter our posts according the **category** named "Boston".
+For instance, let's filter our posts according to the **category** named "Boston".
 First, we have to specify the type, so **category**:
+TODO: rajouter le body de la query pour tous les filters
 
 ```
 allWordpressPost(
@@ -488,7 +497,15 @@ allWordpressPost(
       ...
     }
   }
-)
+) {
+  edges {
+    node {
+      id
+      title
+      content
+    }
+  }
+}
 ```
 
 Then, we add the operator. We will use **elemMatch**:
@@ -502,7 +519,15 @@ allWordpressPost(
       }
     }
   }
-)
+) {
+  edges {
+    node {
+      id
+      title
+      content
+    }
+  }
+}
 ```
 
 And finally, we have to specify which field we want from the categeory and its value with the **eq** operator. Let's go with the **name**.
@@ -518,15 +543,23 @@ allWordpressPost(
       }
     }
   }
-)
+) {
+  edges {
+    node {
+      id
+      title
+      content
+    }
+  }
+}
 ```
 
-The query will only render posts who has the category <em>Boston</em>.
+The query will only render posts that has the category <em>Boston</em>.
 
 
 ## Reusable query
 
-Instead of duplicate your query in multiple component, you can use **fragments**.
+Instead of duplicating your query in multiple component, you can use **fragments**.
 Here is how you declare a frament:
 
 ```
@@ -546,6 +579,7 @@ It consists of three parts:
 3. **The body of the query**: You can define any fields with any level of nesting in here, like you can do for any other GraphQL query.
 
 Let's see how to create a fragment for all WordPress posts now:
+TODO: rajouter la const devant le fragment
 
 ```
 fragment allPosts on wordpress__POSTConnection {
