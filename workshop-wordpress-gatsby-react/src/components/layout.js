@@ -20,12 +20,22 @@ const Layout = ({ children }) => {
           title
         }
       }
+      allWordpressWpApiMenusMenusItems {
+        edges {
+          node {
+            items {
+              title
+              object_slug
+            }
+          }
+        }
+      }
     }
   `)
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} nav={data.allWordpressWpApiMenusMenusItems} />
       <div
         style={{
           margin: `0 auto`,

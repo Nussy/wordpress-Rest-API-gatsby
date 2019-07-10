@@ -14,7 +14,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
     - [Query your data with GraphQL](#query-your-data-with-graphql)
       - [Query all posts and pages](#query-all-posts-and-pages)
   - [Display all posts to the front-end](#display-all-posts-to-the-front-end)
-        - [Let's explain what we did](#lets-explain-what-we-did)
+      - [Let's explain what we did](#lets-explain-what-we-did)
     - [A few usefull arguments than you can apply to your query](#a-few-usefull-arguments-than-you-can-apply-to-your-query)
       - [Sort](#sort)
         - [With one field](#with-one-field)
@@ -353,7 +353,7 @@ And finally, you can update your function to display the content. Because GraphQ
       )
     }
 
-##### Let's explain what we did
+#### Let's explain what we did
 
 Querying with Graphql will returns us an object ***data*** (it's always <em>data</em>!). Inside this object, we have another object ***allWordpressPost*** (the one we specify from our query, it will be <em>allWordpressPages</em> if we want all pages for instance) and inside this one, we have another one ***edges*** who is basically an array of objects which contains all our data, that's why we are using the <em>map()</em> function to loop throught the array.
 
@@ -702,4 +702,17 @@ export const query = graphql`
 ```
 
 So now, instead of using the ***query name*** to call your data, you will use the **alias**. In this example, it would be ***data.firstQuery*** or ***data.secondQuery*** instead of ***data.allWordpressPost***
+
+## Import block library CSS to Gatsby
+
+In order to apply Gutenberg block styles to your website, there is a few steps to follow:
+
+1. First, stop the development server if it's still running:<br/>
+`ctrl + c`.
+2. Then retrieve the CSS file in **/wp-includes/css/dist/block-library** named **style.min.css**.
+3. Then Create a folder named **styles** in ***src/*** and put the ***style.min.css*** file from WordPress
+4. Then, in ***gatsby-browser.js*** file, import this file with this line:<br/>
+`import "./src/styles/block-library.min.css";`
+5. Finally, restart the development server:<br/>
+`gatsby develop`
 
