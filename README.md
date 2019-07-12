@@ -23,6 +23,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
       - [Skip](#skip)
       - [Filter](#filter)
   - [Reusable query](#reusable-query)
+  - [Import block library CSS to Gatsby](#import-block-library-css-to-gatsby)
 
 
 ## Requirements
@@ -286,7 +287,7 @@ and the GraphQL will be:
 As you can see, the differences are the **Query Type** (***allWordpressPost*** for posts and ***allWordpressPage*** for pages) and the fields in the node object.
 Doing that, you should have this result on the right:
 
-TODO: Display a result with the proper WORDPRESS
+![GraphiQL All Pages result](/assets/graphiql-all-pages.png)
 
 If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar** on Windows.
 
@@ -602,7 +603,6 @@ It consists of three parts:
 3. **The body of the query**: You can define any fields with any level of nesting in here, like you can do for any other GraphQL query.
 
 Let's see how to create a fragment for all WordPress posts now:
-TODO: rajouter la const devant le fragment
 
 ```
 fragment allPosts on wordpress__POSTConnection {
@@ -632,7 +632,7 @@ Note: When compiling your site, Gatsby preprocesses all GraphQL queries it finds
 That's why it's a good pratice to create a file who contains all your fragments and, then you call your fragments in your pages, templates, but not in your components.
 
 So, let's do it!
-Create a new file in components folder named **fragments.js**, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
+Create a new file in ***components*** folder named **fragments.js**, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
 
 ```
 import { graphql } from 'gatsby';
