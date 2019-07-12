@@ -157,7 +157,7 @@ Once you've installed the plugin, open **gatsby-config.js** and paste the follow
         * The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
         * Example : 'gatsbyjsexamplewordpress.wordpress.com' or 'www.example-site.com'
         */
-        baseUrl: "wcpboston.eelab.space",
+        baseUrl: "your_wordpress_url",
         // The protocol. This can be http or https.
         protocol: "https",
         // Indicates whether the site is hosted on wordpress.com.
