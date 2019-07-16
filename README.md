@@ -3,17 +3,17 @@
 With the web ecosystem steadily moving towards Javascript and React, let's talk about GraphQL as an easier way to make WP Rest API queries. During this session, we will discuss how to pull, sort, organize and optimize your content from WordPress to React using GraphQL, the data query language developed by Facebook.
 
 - [Make your WordPress Rest API queries easy with GraphQL and Gatsby](#make-your-wordpress-rest-api-queries-easy-with-graphql-and-gatsby)
-  - [Requirements](#requirements)
-  - [WordPress](#wordpress)
-  - [Install the Gatsby](#install-the-gatsby)
+  - [1 - Requirements](#requirements)
+  - [2 - WordPress](#wordpress)
+  - [3 - Install the Gatsby](#install-the-gatsby)
     - [Let's explore quickly what is installed](#lets-explore-quickly-what-is-installed)
       - [Folders](#folders)
       - [Files](#files)
-  - [Link WordPress to Gatsby](#link-wordpress-to-gatsby)
+  - [4 - Link WordPress to Gatsby](#link-wordpress-to-gatsby)
     - [Extra usefull plugins](#extra-usefull-plugins)
     - [Query your data with GraphQL](#query-your-data-with-graphql)
       - [Query all posts and pages](#query-all-posts-and-pages)
-  - [Display all posts to the front-end](#display-all-posts-to-the-front-end)
+  - [5 - Display all posts to the front-end](#display-all-posts-to-the-front-end)
       - [Let's explain what we did](#lets-explain-what-we-did)
     - [A few usefull arguments than you can apply to your query](#a-few-usefull-arguments-than-you-can-apply-to-your-query)
       - [Sort](#sort)
@@ -22,11 +22,12 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
       - [Limit](#limit)
       - [Skip](#skip)
       - [Filter](#filter)
-  - [Reusable query](#reusable-query)
-  - [Import block library CSS to Gatsby](#import-block-library-css-to-gatsby)
+  - [6 - Reusable query](#reusable-query)
+  - [7 - Import block library CSS to Gatsby](#import-block-library-css-to-gatsby)
+  - [8 - Deploy to production](#)
 
 
-## Requirements
+## 1 - Requirements
 
 - [Install NodeJS and NPM](https://nodejs.org/en/)
 
@@ -70,14 +71,14 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
   After running these commands, you might need to open a new shell for them to take effect.
 
 
-## WordPress
+## 2 - WordPress
 
 You will not need to install a WordPress. We will provide you an url to use. Or, if you already have your WordPress, you can then use it.
 
 Something very cool with Gatsby is that you can very easily change the WordPress to the one you want just by changing one line in your code.
 
 
-## Install the Gatsby
+## 3 - Install the Gatsby
 
 Gatsby is a **React-based, GraphQL powered, static site generator**. What does that even mean?  Well, it weaves together the best parts of React, webpack, react-router, GraphQL, and other front-end tools in to one very enjoyable developer experience. Don’t get hung up on the moniker "static site generator".  That term has been around for a while, but Gatsby is far more like a modern front-end framework than a static site generator of old.
 
@@ -139,7 +140,7 @@ And now, your website will be available to [http://localhost:8000/](http://local
 - **package.json**: This is where you will add all your modules and scripts that you need for you website.
 
 
-## Link WordPress to Gatsby
+## 4 - Link WordPress to Gatsby
 
 For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/)**. It's very simple, open a new terminal window and just do the installation by this simple command line:
 (The **--save** tag means that a new line with the plugin slug and his version will be added to the package.json file)
@@ -212,6 +213,7 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 
   You will have to add the plugin [wp-api-yoast-meta](https://github.com/maru3l/wp-api-yoast-meta) which allows you to pull the <em>yoast_meta: {...}</em>
 
+####
 
 ### Query your data with GraphQL
 
@@ -261,6 +263,7 @@ and the GraphQL will be:
       }
     }
 
+#####
 It's almost exactly the same for pages, except that the ***${Endpoint}*** is different:
 
 `https://wcpboston.eelab.space/wp-json/wp/v2/pages`
@@ -291,9 +294,13 @@ Doing that, you should have this result on the right:
 
 If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar** on Windows.
 
+##### Example for a single post query
+
+![GraphiQL Single post](/assets/single-post.png)
+
 All of that is nice, but how are we implement that for the front-end. It's now ReactJS time!
 
-## Display all posts to the front-end
+## 5 - Display all posts to the front-end
 
 Let's first create a new page called **posts.js**, then **import React** and the **Layout** component to keep the header and footer, and finally create a function that just return the title of the page:
 
@@ -308,11 +315,7 @@ Let's first create a new page called **posts.js**, then **import React** and the
       )
     }
 
-If you server is still running, it should have compiled and you should be able to see this line:
-
-```sh
-6 pages                                                                                 gatsby-starter-default
-```
+If you server is still running, it should have compiled.
 
 If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
 
@@ -322,37 +325,53 @@ Let's now display all posts title and his content! To do so, it's very simple. Y
 
 Then after your function, you just need to export a variable who contains the graphql query:
 
-    export const query = graphql`
-      query {
-        allWordpressPost {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
+<details><summary>Show code</summary>
+<p>
+
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost {
+      edges {
+        node {
+          id
+          title
+          content
         }
       }
-    `
+    }
+  }
+`
+```
+
+</p>
+</details>
 
 And finally, you can update your function to display the content. Because GraphQL returns us an array, we will have to loop throught it:
 
-    export default (props) => {
-      return (
-        <Layout>
-          <h1>Posts page</h1>
-          {props.data.allWordpressPost.edges.map(({node}) => {
-            return (
-              <div key={node.id}>
-                <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-                <p dangerouslySetInnerHTML={{ __html: node.content }} />
-              </div>
-            )`
-          })}
-        </Layout>
-      )
-    }
+<details><summary>Show code</summary>
+<p>
+
+```javascript
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Posts page</h1>
+      {props.data.allWordpressPost.edges.map(({node}) => {
+        return (
+          <div key={node.id}>
+            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
+            <p dangerouslySetInnerHTML={{ __html: node.content }} />
+          </div>
+        )`
+      })}
+    </Layout>
+  )
+}
+```
+
+</p>
+</details>
 
 #### Let's explain what we did
 
@@ -386,24 +405,6 @@ Arguments are used to filter, limit, skip or sort your results from your query. 
 #### Sort
 
 The **sort** argument allows you to change the order of your rendered data. It's an object and accepts two properties: the **fields** name (you can sort on multiple fields, the second sort field gets evaluated when the first field is identical) and the **order**. By defaut, it's based on the ***ASC*** order.
-
-<!-- ##### Without fields
-
-    export const query = graphql`
-      query {
-        allWordpressPost(sort: { order: DESC }) {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
-        }
-      }
-    `
-
-Your data are now order by ***DESC*** insteand of ***ASC***. -->
 
 ##### With one field
 
@@ -581,7 +582,7 @@ allWordpressPost(
 The query will only render posts that has the category <em>Boston</em>.
 
 
-## Reusable query
+## 6 - Reusable query
 
 Instead of duplicating your query in multiple component, you can use **fragments**.
 Here is how you declare a frament:
@@ -703,7 +704,7 @@ export const query = graphql`
 
 So now, instead of using the ***query name*** to call your data, you will use the **alias**. In this example, it would be ***data.firstQuery*** or ***data.secondQuery*** instead of ***data.allWordpressPost***
 
-## Import block library CSS to Gatsby
+## 7 - Import block library CSS to Gatsby
 
 In order to apply Gutenberg block styles to your website, there is a few steps to follow:
 
@@ -716,3 +717,6 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 5. Finally, restart the development server:<br/>
 `gatsby develop`
 
+## 8 - Deploy to production
+
+s
