@@ -61,7 +61,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
   Instead of using NPM, you can use [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) as well.
 
-- Extra: [Install NVM](https://github.com/nvm-sh/nvm)
+- :star2:	Extra: [Install NVM](https://github.com/nvm-sh/nvm)
 
   NVM means "Node Version Manager". It's a:
 
