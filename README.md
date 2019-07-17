@@ -29,6 +29,14 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
 ## 1 - Requirements
 
+- [Install Chrome](https://www.google.com/search?q=install+chrome&oq=install+chrome&aqs=chrome..69i57j69i60j0l4.1696j0j7&sourceid=chrome&ie=UTF-8)
+
+  You can use the browser of your choice to follow this workshop, but Chrome is the one I'm using.
+
+- [Install VSCode](https://code.visualstudio.com/download)
+
+  You can also use the IDE of your choice, but I recommend you to install VSCode. It's easy to use, works very well with JavaScript and a built-in terminal (that you will have to use).
+
 - [Install NodeJS and NPM](https://nodejs.org/en/)
 
   NodeJS is not a framwork. It's a JavaScript runtime, a low-level server environment. It is closer to C than languages ​​interpreted as PHP, Ruby or Python.
@@ -53,7 +61,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
   Instead of using NPM, you can use [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) as well.
 
-- TIPS: [Install NVM](https://github.com/nvm-sh/nvm)
+- Extra: [Install NVM](https://github.com/nvm-sh/nvm)
 
   NVM means "Node Version Manager". It's a:
 
