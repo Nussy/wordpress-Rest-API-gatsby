@@ -1,33 +1,31 @@
+- [Make your WordPress Rest API queries easy with GraphQL and Gatsby](#make-your-wordpress-rest-api-queries-easy-with-graphql-and-gatsby)
+  - [Requirements](#requirements)
+  - [WordPress](#wordpress)
+  - [Install the Gatsby](#install-the-gatsby)
+    * [Explore quickly what is installed](#explore-quickly-what-is-installed)
+      + [Folders](#folders)
+      + [Files](#files)
+    * [Create a page with Gatsby](#create-a-page-with-gatsby)
+    * [Link WordPress to Gatsby](#link-wordpress-to-gatsby)
+  - [Pull the content with GraphQL](#pull-the-content-with-graphql)
+    * [Query all posts and pages](#query-all-posts-and-pages)
+  - [Display all posts to the front-end](#display-all-posts-to-the-front-end)
+      + [What did we?](#What-did-we?)
+  - [Bonus: Pull ACF, Menus and Widgets](#bonus-pull-acf-menus-and-widgets)
+    * [ACF](#acf)
+    * [Menus](#menus)
+  - [Build a prodution version](#build-a-prodution-version)
+  - [Deploy to production with Surge](#deploy-to-production-with-surge)
+  - [Credits](#credits)
+
 # Make your WordPress Rest API queries easy with GraphQL and Gatsby
 
 With the web ecosystem steadily moving towards Javascript and React, let's talk about GraphQL as an easier way to make WP Rest API queries. During this session, we will discuss how to pull, sort, organize and optimize your content from WordPress to React using GraphQL, the data query language developed by Facebook.
 
-- [Make your WordPress Rest API queries easy with GraphQL and Gatsby](#make-your-wordpress-rest-api-queries-easy-with-graphql-and-gatsby)
-  - [1 - Requirements](#requirements)
-  - [2 - WordPress](#wordpress)
-  - [3 - Install the Gatsby](#install-the-gatsby)
-    - [Let's explore quickly what is installed](#lets-explore-quickly-what-is-installed)
-      - [Folders](#folders)
-      - [Files](#files)
-  - [4 - Link WordPress to Gatsby](#link-wordpress-to-gatsby)
-    - [Extra usefull plugins](#extra-usefull-plugins)
-    - [Query your data with GraphQL](#query-your-data-with-graphql)
-      - [Query all posts and pages](#query-all-posts-and-pages)
-  - [5 - Display all posts to the front-end](#display-all-posts-to-the-front-end)
-      - [Let's explain what we did](#lets-explain-what-we-did)
-    - [A few usefull arguments than you can apply to your query](#a-few-usefull-arguments-than-you-can-apply-to-your-query)
-      - [Sort](#sort)
-        - [With one field](#with-one-field)
-        - [With one field](#with-one-field-1)
-      - [Limit](#limit)
-      - [Skip](#skip)
-      - [Filter](#filter)
-  - [6 - Reusable query](#reusable-query)
-  - [7 - Import block library CSS to Gatsby](#import-block-library-css-to-gatsby)
-  - [8 - Deploy to production](#)
 
+![Gatsby folders](https://media3.giphy.com/media/wi8Ez1mwRcKGI/giphy.gif?cid=790b76115d2fc47f366d694f36f7bac7&rid=giphy.gif)
 
-## 1 - Requirements
+## Requirements
 
 - [Install Chrome](https://www.google.com/search?q=install+chrome&oq=install+chrome&aqs=chrome..69i57j69i60j0l4.1696j0j7&sourceid=chrome&ie=UTF-8)
 
@@ -63,7 +61,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
 #### :star2: Extra: [Install NVM](https://github.com/nvm-sh/nvm)
 
-<details><summary>Show how</summary>
+<details><summary>How install NVM</summary>
 <p>
   NVM means "Node Version Manager". It's a:
 
@@ -82,14 +80,18 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 </p>
 </details>
 
-## 2 - WordPress
+## WordPress
+
+![WordPress logo](/assets/wp-logo.png =100x100)
 
 You will not need to install a WordPress. You can use this url `wcpboston.eelab.space`.
 
 Something very cool with Gatsby is that you can very easily change the WordPress to the one you want just by changing one line in your code.
 
 
-## 3 - Install the Gatsby
+## Install the Gatsby
+
+![Gatsby logo](/assets/gatsby-logo.png =100x100)
 
 Gatsby is a **React-based, GraphQL powered, static site generator**. What does that even mean?  Well, it weaves together the best parts of React, webpack, react-router, GraphQL, and other front-end tools in to one very enjoyable developer experience. Don’t get hung up on the moniker "static site generator".  That term has been around for a while, but Gatsby is far more like a modern front-end framework than a static site generator of old.
 
@@ -125,7 +127,7 @@ gatsby develop
 And now, your website will be available to [http://localhost:8000/](http://localhost:8000/)
 
 
-### Let's explore quickly what is installed
+### Explore quickly what is installed
 
 ![Gatsby folders](/assets/gatsby-folders.png)
 
@@ -247,7 +249,9 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 </p>
 </details>
 
-## 4 - Pull the content with GraphQL
+## Pull the content with GraphQL
+
+![GraphQL logo](/assets/graphql-logo.png =100x100)
 
 GraphQL is a query language (the QL part of its name). If you’re familiar with SQL, it works in a very similar way. Using a special syntax, you describe the data you want in your component and then that data is given to you.
 
@@ -331,7 +335,7 @@ Doing that, you should have this result on the right:
 
 If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar** on Windows.
 
-##### Example for a single post query
+#### Example for a single post query
 
 ![GraphiQL Single post](/assets/single-post.png)
 
@@ -530,6 +534,7 @@ allWordpressPost(
 ```
 
 The query will only render posts that has the category <em>Boston</em>.
+
 </details>
 </p>
 
@@ -660,7 +665,9 @@ So now, instead of using the ***query name*** to call your data, you will use th
 </details>
 </p>
 
-## 5 - Display all posts to the front-end
+## Display all posts to the front-end
+
+![React logo](/assets/reactjs-logo.png =100x100)
 
 Inside the post page that we created earlier (**posts.js**), import and the **Layout** component to keep the header and footer, and wrap the h1 html tag with the new component:
 
@@ -735,7 +742,7 @@ export default (props) => {
 <!-- </p>
 </details> -->
 
-#### Let's explain what we did
+#### What did we?
 
 Querying with Graphql will returns us an object ***data*** (it's always <em>data</em>!). Inside this object, we have another object ***allWordpressPost*** (the one we specify from our query, it will be <em>allWordpressPages</em> if we want all pages for instance) and inside this one, we have another one ***edges*** who is basically an array of objects which contains all our data, that's why we are using the <em>map()</em> function to loop throught the array.
 
@@ -760,6 +767,8 @@ So, your function should looks like that now:
 
 And now, your content is rendered properly!
 
+:warning: **IMPORTANT**: Only pages or template pages can define GraphQL queries. If you want to use a GraphQL query inside a component, you will have to use a hook of `StaticQuery` called `useStaticQuery`, that allows components to retrieve data via GraphQL query (we will see later how yo use it).
+
 #### :star2: Extra: Import Gutenberg CSS block library to Gatsby
 
 In order to apply Gutenberg block styles to your website, there is a few steps to follow.
@@ -779,7 +788,7 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 </details>
 </p>
 
-## 6 - Bonus: Pull ACF, Menus and Widgets
+## Bonus: Pull ACF, Menus and Widgets
 
 ### ACF
 
@@ -908,7 +917,7 @@ We can finally render the menus with React:
 </nav>
 ```
 
-## 7 - Build a prodution version
+## Build a prodution version
 
 To build a produciton version, Gatsby provide us a command who produce a directory of static HTML and JavaScript files (public folder) which you can deploy to a static site hosting service.
 
@@ -916,7 +925,9 @@ Simply do the following command `gatsby build` at the root of the project folder
 
 A few secondes later, Gatsby should have create a `public` folder. We will deploy this folder in the next step.
 
-## 8 - Deploy to production with Surge
+## Deploy to production with Surge
+
+![Surge logo](/assets/surge-logo.jpeg =100x100)
 
 Surge is one of many "static site hosts" which make it possible to deploy Gatsby sites.
 
@@ -927,3 +938,6 @@ In order to be able to use it, follow the next steps:
 3. Bonus: To ensure future deploys are sent to the same location, you can remember a domain. For instance, if your website was deployed to http://amazing-website.surge.sh/, run the following command: `surge --domain amazing-website.surge.sh`. The next time yo will run the `surge` command, it will deploy to the same domain.
 
 
+## Credits
+
+Logos: WordPress, Gutenberg, Gatsbyjs, Graphql, Reactjs, Surge.sh
