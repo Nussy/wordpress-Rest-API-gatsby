@@ -82,7 +82,7 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
 ## WordPress
 
-![WordPress logo](/assets/wp-logo.png =100x100)
+![WordPress logo](/assets/wp-logo.png){:height="100px" width="100px"}
 
 You will not need to install a WordPress. You can use this url `wcpboston.eelab.space`.
 
@@ -91,7 +91,7 @@ Something very cool with Gatsby is that you can very easily change the WordPress
 
 ## Install the Gatsby
 
-![Gatsby logo](/assets/gatsby-logo.png =100x100)
+![Gatsby logo](/assets/gatsby-logo.png){:height="100px" width="100px"}
 
 Gatsby is a **React-based, GraphQL powered, static site generator**. What does that even mean?  Well, it weaves together the best parts of React, webpack, react-router, GraphQL, and other front-end tools in to one very enjoyable developer experience. Don’t get hung up on the moniker "static site generator".  That term has been around for a while, but Gatsby is far more like a modern front-end framework than a static site generator of old.
 
@@ -251,7 +251,7 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 
 ## Pull the content with GraphQL
 
-![GraphQL logo](/assets/graphql-logo.png =100x100)
+![GraphQL logo](/assets/graphql-logo.png){:height="100px" width="100px"}
 
 GraphQL is a query language (the QL part of its name). If you’re familiar with SQL, it works in a very similar way. Using a special syntax, you describe the data you want in your component and then that data is given to you.
 
@@ -667,7 +667,7 @@ So now, instead of using the ***query name*** to call your data, you will use th
 
 ## Display all posts to the front-end
 
-![React logo](/assets/reactjs-logo.png =100x100)
+![React logo](/assets/reactjs-logo.png){:height="100px" width="100px"}
 
 Inside the post page that we created earlier (**posts.js**), import and the **Layout** component to keep the header and footer, and wrap the h1 html tag with the new component:
 
@@ -927,7 +927,7 @@ A few secondes later, Gatsby should have create a `public` folder. We will deplo
 
 ## Deploy to production with Surge
 
-![Surge logo](/assets/surge-logo.jpeg =100x100)
+![Surge logo](/assets/surge-logo.jpeg){:height="100px" width="100px"}
 
 Surge is one of many "static site hosts" which make it possible to deploy Gatsby sites.
 
