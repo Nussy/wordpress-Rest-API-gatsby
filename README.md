@@ -937,7 +937,7 @@ In order to be able to use it, follow the next steps:
 2. Then, deploy your site: `surge public/`. If it's the firsts time, you will have to create an account (don't worry, it's free!). Enter your email, password, and press enter to confirm that the path to your public/ folder is correct.
 3. Bonus: To ensure future deploys are sent to the same location, you can remember a domain. For instance, if your website was deployed to http://amazing-website.surge.sh/, run the following command: `surge --domain amazing-website.surge.sh`. The next time yo will run the `surge` command, it will deploy to the same domain.
 
-
+![Amazing](https://media2.giphy.com/media/XreQmk7ETCak0/giphy.gif?cid=790b76115d2fca115763426e2e8cb7f6&rid=giphy.gif)
 ## Credits
 
 Logos: WordPress, Gutenberg, Gatsbyjs, Graphql, Reactjs, Surge.sh
