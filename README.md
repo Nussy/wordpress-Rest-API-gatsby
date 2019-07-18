@@ -61,8 +61,10 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
   Instead of using NPM, you can use [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) as well.
 
-- :star2:	Extra: [Install NVM](https://github.com/nvm-sh/nvm)
+#### :star2: Extra: [Install NVM](https://github.com/nvm-sh/nvm)
 
+<details><summary>Show how</summary>
+<p>
   NVM means "Node Version Manager". It's a:
 
   > Simple bash script to manage multiple active node.js versions. — NVM, Github
@@ -77,11 +79,12 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
   You can install any nodeJS version you want and use it like that. For this workshop, we will be using the **NodeJS version 10.16.0**.
 
   After running these commands, you might need to open a new shell for them to take effect.
-
+</p>
+</details>
 
 ## 2 - WordPress
 
-You will not need to install a WordPress. We will provide you an url to use. Or, if you already have your WordPress, you can then use it.
+You will not need to install a WordPress. You can use this url `wcpboston.eelab.space`.
 
 Something very cool with Gatsby is that you can very easily change the WordPress to the one you want just by changing one line in your code.
 
@@ -95,7 +98,7 @@ It uses powerful preconfiguration to build a website that uses only static files
 You code and develop your site, Gatsby transforms it into a directory with a single HTML file and your static assets. This folder is uploaded to your favorite hosting provider, and voila.
 
 In order to generate a Gatsby website, we will use Gatsby CLI.
-First, do:
+First, from the terminal, do:
 
 ```sh
 npm install -g gatsby-cli
@@ -147,10 +150,27 @@ And now, your website will be available to [http://localhost:8000/](http://local
 - **gatsby-ssr.js**: This file is where Gatsby expects to find any usage of the Gatsby server-side rendering APIs. We are not using it but here is the full [documentation](https://www.gatsbyjs.org/docs/ssr-apis/).
 - **package.json**: This is where you will add all your modules and scripts that you need for you website.
 
+### Create a page with Gatsby
 
-## 4 - Link WordPress to Gatsby
+Create a page with Gatsby is very simple, any React component defined in `src/pages/*.js` will automatically become a page.
 
-For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/)**. It's very simple, open a new terminal window and just do the installation by this simple command line:
+For instance, let's create a page called `posts.js` and past the following code into it:
+
+```javascript
+import React from "react"
+
+export default (props) => {
+  return (
+    <h1>Posts page</h1>
+  )
+}
+```
+
+If the server is still running (otherwise, at the root project folder, run the following command from the terminal `gatsby develop`), you can now navigate to `http://localhost:8000/posts/` and your new page will be accessible.
+
+### Link WordPress to Gatsby
+
+For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpress](https://www.gatsbyjs.org/packages/gatsby-source-wordpress/)**. It's very simple, open a new terminal window at the root the project and just do the installation by this simple command line:
 (The **--save** tag means that a new line with the plugin slug and his version will be added to the package.json file)
 
 ```sh
@@ -166,7 +186,7 @@ Once you've installed the plugin, open **gatsby-config.js** and paste the follow
         * The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
         * Example : 'gatsbyjsexamplewordpress.wordpress.com' or 'www.example-site.com'
         */
-        baseUrl: "your_wordpress_url",
+        baseUrl: "the_wordpress_url_that_was_given_earlier",
         // The protocol. This can be http or https.
         protocol: "https",
         // Indicates whether the site is hosted on wordpress.com.
@@ -201,9 +221,12 @@ NOTE: Every time you modify this file, you will have to restart the server. Pres
 gatsby develop
 ```
 
-### Extra usefull plugins
+#### :star2: Extra usefull plugins
 
 By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so you will have to install a few plugins to your WordPress in order to be able to have those data available with GraphQL.
+
+<details><summary>Show usefull plugins</summary>
+<p>
 
 - **ACF**
 
@@ -221,9 +244,10 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 
   You will have to add the plugin [wp-api-yoast-meta](https://github.com/maru3l/wp-api-yoast-meta) which allows you to pull the <em>yoast_meta: {...}</em>
 
-####
+</p>
+</details>
 
-### Query your data with GraphQL
+## 4 - Pull the content with GraphQL
 
 GraphQL is a query language (the QL part of its name). If you’re familiar with SQL, it works in a very similar way. Using a special syntax, you describe the data you want in your component and then that data is given to you.
 
@@ -231,11 +255,13 @@ Gatsby uses GraphQL to enable components to declare the data they need.
 
 When you started the server, a second link was displayed in the terminal: [http://localhost:8000/___graphql](http://localhost:8000/___graphql). This is where you can test you query or explore the types and properties of your GraphQL.
 
-#### Query all posts and pages
+Let's learn how to query your data with GraphQL!
+
+### Query all posts and pages
 
 Basically, to query contents from WordPress, it would be very similar to:
 
-```
+```javascript
 {
   allWordpress${Manufacturer}${Endpoint} {
     edges {
@@ -258,42 +284,45 @@ So, for instance, for all posts, url will be:
 
 and the GraphQL will be:
 
-    {
-      allWordpressPost {
-        edges {
-          node {
-            id
-            slug
-            title
-            content
-          }
-        }
+```javascript
+{
+  allWordpressPost {
+    edges {
+      node {
+        id
+        slug
+        title
+        content
       }
     }
+  }
+}
+```
 
-#####
 It's almost exactly the same for pages, except that the ***${Endpoint}*** is different:
 
 `https://wcpboston.eelab.space/wp-json/wp/v2/pages`
 
 and the GraphQL will be:
 
-    {
-      allWordpressPage {
-        edges {
-          node {
-            id
-            slug
-            title
-            content
-            excerpt
-            date
-            modified
-            status
-          }
-        }
+```javascript
+{
+  allWordpressPage {
+    edges {
+      node {
+        id
+        slug
+        title
+        content
+        excerpt
+        date
+        modified
+        status
       }
     }
+  }
+}
+```
 
 As you can see, the differences are the **Query Type** (***allWordpressPost*** for posts and ***allWordpressPage*** for pages) and the fields in the node object.
 Doing that, you should have this result on the right:
@@ -308,38 +337,28 @@ If you don't know which properties are available in GraphQL, you can press **Shi
 
 All of that is nice, but how are we implement that for the front-end. It's now ReactJS time!
 
-## 5 - Display all posts to the front-end
+#### :star2: Extra: A few usefull arguments than you can apply to your query
 
-Let's first create a new page called **posts.js**, then **import React** and the **Layout** component to keep the header and footer, and finally create a function that just return the title of the page:
+Arguments are used to filter, limit, skip or sort your results from your query. There are applyed to the query type.
 
-    import React from "react"
-    import Layout from "../components/layout"
-
-    export default (props) => {
-      return (
-        <Layout>
-          <h1>Posts page</h1>
-        </Layout>
-      )
-    }
-
-If you server is still running, it should have compiled.
-
-If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
-
-Let's now display all posts title and his content! To do so, it's very simple. You first need to import **graphql** from gatsby at the top of your file:
-
-`import { graphql } from 'gatsby'`
-
-Then after your function, you just need to export a variable who contains the graphql query:
-
-<details><summary>Show code</summary>
+<details><summary>Explore how to use arguments in your query</summary>
 <p>
+
+#### Sort
+
+The **sort** argument allows you to change the order of your rendered data. It's an object and accepts two properties: the **fields** name (you can sort on multiple fields, the second sort field gets evaluated when the first field is identical) and the **order**. By defaut, it's based on the ***ASC*** order.
+
+##### With one field
 
 ```javascript
 export const query = graphql`
   query {
-    allWordpressPost {
+    allWordpressPost(
+      sort: {
+        fields: [title]
+        order: DESC
+      }
+    ) {
       edges {
         node {
           id
@@ -352,112 +371,31 @@ export const query = graphql`
 `
 ```
 
-</p>
-</details>
-
-And finally, you can update your function to display the content. Because GraphQL returns us an array, we will have to loop throught it:
-
-<details><summary>Show code</summary>
-<p>
-
-```javascript
-export default (props) => {
-  return (
-    <Layout>
-      <h1>Posts page</h1>
-      {props.data.allWordpressPost.edges.map(({node}) => {
-        return (
-          <div key={node.id}>
-            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-            <p dangerouslySetInnerHTML={{ __html: node.content }} />
-          </div>
-        )`
-      })}
-    </Layout>
-  )
-}
-```
-
-</p>
-</details>
-
-#### Let's explain what we did
-
-Querying with Graphql will returns us an object ***data*** (it's always <em>data</em>!). Inside this object, we have another object ***allWordpressPost*** (the one we specify from our query, it will be <em>allWordpressPages</em> if we want all pages for instance) and inside this one, we have another one ***edges*** who is basically an array of objects which contains all our data, that's why we are using the <em>map()</em> function to loop throught the array.
-
-If you go back to the website, all posts form WordPress are displayed! But you've probably notice that something is not good, HTML is not striped. it's because by default, React escapes the HTML to prevent XSS (Cross-site scripting). So to render HTML, we have to add the following property to our HTML tag:
-
-`dangerouslySetInnerHTML={{ __html: ... }}`
-
-<em>dangerouslySetInnerHTML</em> is React's replacement for using innerHTML in the browerDOM.
-
-So, your function should looks like that now:
-
-```
-{props.data.allWordpressPost.edges.map(({node}) => {
-  return (
-    <div key={node.id}>
-      <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-      <p dangerouslySetInnerHTML={{ __html: node.content }} />
-    </div>
-  )
-})}
-```
-
-And now, your content is rendered properly!
-
-### A few usefull arguments than you can apply to your query
-
-Arguments are used to filter, limit, skip or sort your results from your query. There are applyed to the query type.
-
-#### Sort
-
-The **sort** argument allows you to change the order of your rendered data. It's an object and accepts two properties: the **fields** name (you can sort on multiple fields, the second sort field gets evaluated when the first field is identical) and the **order**. By defaut, it's based on the ***ASC*** order.
-
-##### With one field
-
-    export const query = graphql`
-      query {
-        allWordpressPost(
-          sort: {
-            fields: [title]
-            order: DESC
-          }
-        ) {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
-        }
-      }
-    `
-
 Your data are now order by the field ***title*** and by ***DESC***.
 Note that [] around the field name are optionnal when there is only one field.
 
 ##### With multiple fields
 
-    export const query = graphql`
-      query {
-        allWordpressPost(
-          sort: {
-            fields: [title, status]
-            order: DESC
-          }
-        ) {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost(
+      sort: {
+        fields: [title, status]
+        order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id
+          title
+          content
         }
       }
-    `
+    }
+  }
+`
+```
 
 Your data are now order by the fields ***title*** and ***status*** and by ***DESC***.
 Each field has to be separated by a comma.
@@ -466,19 +404,21 @@ Each field has to be separated by a comma.
 
 The **limit** argument allows you to display a certain number of content. It requires an Int as a value:
 
-    export const query = graphql`
-      query {
-        allWordpressPost(limit: 6) {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost(limit: 6) {
+      edges {
+        node {
+          id
+          title
+          content
         }
       }
-    `
+    }
+  }
+`
+```
 
 In this example, we will display only the 6 first last added posts.
 
@@ -486,19 +426,21 @@ In this example, we will display only the 6 first last added posts.
 
 The **skip** argument allows you to skip over a number of results. It requires an Int as a value:
 
-    export const query = graphql`
-      query {
-        allWordpressPost(skip: 6) {
-          edges {
-            node {
-              id
-              title
-              content
-            }
-          }
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost(skip: 6) {
+      edges {
+        node {
+          id
+          title
+          content
         }
       }
-    `
+    }
+  }
+`
+```
 
 In this example, we will omit the 6 first posts.
 
@@ -523,7 +465,7 @@ For instance, let's filter our posts according to the **category** named "Boston
 First, we have to specify the type, so **category**:
 TODO: rajouter le body de la query pour tous les filters
 
-```
+```javascript
 allWordpressPost(
   filter: {
     categories: {
@@ -543,7 +485,7 @@ allWordpressPost(
 
 Then, we add the operator. We will use **elemMatch**:
 
-```
+```javascript
 allWordpressPost(
   filter: {
     categories: {
@@ -565,7 +507,7 @@ allWordpressPost(
 
 And finally, we have to specify which field we want from the categeory and its value with the **eq** operator. Let's go with the **name**.
 
-```
+```javascript
 allWordpressPost(
   filter: {
     categories: {
@@ -588,14 +530,17 @@ allWordpressPost(
 ```
 
 The query will only render posts that has the category <em>Boston</em>.
+</details>
+</p>
 
-
-## 6 - Reusable query
+#### :star2: Extra 2: A Reusable query
 
 Instead of duplicating your query in multiple component, you can use **fragments**.
-Here is how you declare a frament:
 
-```
+<details><summary>Explore how to declare and use a fragment:</summary>
+<p>
+
+```javascript
 fragment FragmentName on TypeName {
   field1
   field2
@@ -613,7 +558,7 @@ It consists of three parts:
 
 Let's see how to create a fragment for all WordPress posts now:
 
-```
+```javascript
 fragment allPosts on wordpress__POSTConnection {
   edges {
     node {
@@ -629,7 +574,7 @@ So here, ***allPosts*** is the **FragmentName**, ***wordpress__POSTConnection***
 
 Once our fragment is declared, we can use it in our query by calling the **FragmentName** preceded by three dots:
 
-```
+```javascript
 {
   allWordpressPost {
     ...allPosts
@@ -643,7 +588,7 @@ That's why it's a good pratice to create a file who contains all your fragments 
 So, let's do it!
 Create a new file in ***components*** folder named **fragments.js**, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
 
-```
+```javascript
 import { graphql } from 'gatsby';
 
 export const fragments = graphql`
@@ -667,7 +612,7 @@ By default, date will be printed as ISO-8601 format. You can format it by adding
 Finally, you can use your fragments named **allPosts** in all wanted pages.
 Open your **posts.js** file and replace the previous query by calling our fragment:
 
-```
+```javascript
 export const query = graphql`
   query {
     allWordpressPost {
@@ -685,7 +630,7 @@ export const query = graphql`
 
 will become:
 
-```
+```javascript
 export const query = graphql`
   query {
     allWordpressPost {
@@ -697,7 +642,7 @@ export const query = graphql`
 
 Note: If you want to run two queries on the same page, you can use an **alias**. See below based on the previous fragment example:
 
-```
+```javascript
 export const query = graphql`
   query {
     firstQuery: allWordpressPost(limit: 6) {
@@ -712,9 +657,115 @@ export const query = graphql`
 
 So now, instead of using the ***query name*** to call your data, you will use the **alias**. In this example, it would be ***data.firstQuery*** or ***data.secondQuery*** instead of ***data.allWordpressPost***
 
-## 7 - Import block library CSS to Gatsby
+</details>
+</p>
 
-In order to apply Gutenberg block styles to your website, there is a few steps to follow:
+## 5 - Display all posts to the front-end
+
+Inside the post page that we created earlier (**posts.js**), import and the **Layout** component to keep the header and footer, and wrap the h1 html tag with the new component:
+
+```javascript
+import React from "react"
+import Layout from "../components/layout"
+
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Posts page</h1>
+    </Layout>
+  )
+}
+```
+
+If you server is still running, it should have compiled.
+
+If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
+
+Let's now display all posts title and his content! To do so, it's very simple. You first need to import **graphql** from gatsby at the top of your file:
+
+`import { graphql } from 'gatsby'`
+
+Then after your function, you just need to export a variable who contains the graphql query:
+
+<!-- <details><summary>Show code</summary>
+<p> -->
+
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost {
+      edges {
+        node {
+          id
+          title
+          content
+        }
+      }
+    }
+  }
+`
+```
+
+<!-- </p>
+</details> -->
+
+And finally, you can update your function to display the content. Because GraphQL returns us an array, you will have to loop throught it:
+
+<!-- <details><summary>Show code</summary>
+<p> -->
+
+```javascript
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Posts page</h1>
+      {props.data.allWordpressPost.edges.map(({node}) => {
+        return (
+          <div key={node.id}>
+            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
+            <p dangerouslySetInnerHTML={{ __html: node.content }} />
+          </div>
+        )
+      })}
+    </Layout>
+  )
+}
+```
+
+<!-- </p>
+</details> -->
+
+#### Let's explain what we did
+
+Querying with Graphql will returns us an object ***data*** (it's always <em>data</em>!). Inside this object, we have another object ***allWordpressPost*** (the one we specify from our query, it will be <em>allWordpressPages</em> if we want all pages for instance) and inside this one, we have another one ***edges*** who is basically an array of objects which contains all our data, that's why we are using the <em>map()</em> function to loop throught the array.
+
+If you go back to the website, all posts form WordPress are displayed! But you've probably notice that something is not good, HTML is not striped. it's because by default, React escapes the HTML to prevent XSS (Cross-site scripting). So to render HTML, we have to add the following property to our HTML tag:
+
+`dangerouslySetInnerHTML={{ __html: ... }}`
+
+<em>dangerouslySetInnerHTML</em> is React's replacement for using innerHTML in the browerDOM.
+
+So, your function should looks like that now:
+
+```javascript
+{props.data.allWordpressPost.edges.map(({node}) => {
+  return (
+    <div key={node.id}>
+      <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
+      <p dangerouslySetInnerHTML={{ __html: node.content }} />
+    </div>
+  )
+})}
+```
+
+And now, your content is rendered properly!
+
+#### :star2: Extra: Import Gutenberg CSS block library to Gatsby
+
+In order to apply Gutenberg block styles to your website, there is a few steps to follow.
+
+<details><summary>See all steps</summary>
+<p>
 
 1. First, stop the development server if it's still running:<br/>
 `ctrl + c`.
@@ -725,6 +776,154 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 5. Finally, restart the development server:<br/>
 `gatsby develop`
 
-## 8 - Deploy to production
+</details>
+</p>
 
-s
+## 6 - Bonus: Pull ACF, Menus and Widgets
+
+### ACF
+
+You will have to first, set the `useACF` property to `true` from `gatsby-source-wordpress` settings in **gatsby-config.js** file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
+
+Then, restart your server (`ctrl+c` to stop it, then `gatsby develop` to start it).
+
+Let's use the following example:
+
+![All posts](/assets/all-posts.png)
+
+Each post has a link (htts://www.google.ca), this link is an Advanced Custom Field from WordPress.
+
+In order to retrieve this field, from the all posts query, you just need to add a new field:
+
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost {
+      edges {
+        node {
+          id
+          title
+          content
+          acf {
+            field_url
+          }
+        }
+      }
+    }
+  }
+`
+```
+
+And now, update your render function to display this field:
+
+```javascript
+<a target="_blank" rel="noopener noreferrer" href={post.node.acf.field_url}>
+  {post.node.acf.field_url}
+</a>
+```
+
+So, your function should looks like the following:
+
+```javascript
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Posts page</h1>
+      {props.data.allWordpressPost.edges.map(({node}) => {
+        return (
+          <div key={node.id}>
+            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
+            <p dangerouslySetInnerHTML={{ __html: node.content }} />
+            <a target="_blank" rel="noopener noreferrer" href="{post.node.acf.field_url}">
+              {post.node.acf.field_url}
+            </a>
+          </div>
+        )
+      })}
+    </Layout>
+  )
+}
+```
+
+### Menus
+
+You will have to add the plugin [wp-api-menus] to WordPress (https://wordpress.org/plugins/wp-api-menus/) which gives you the menus and menu locations endpoint to the REST-API (we already added this plugin to our WordPress in order to be available for you).
+
+Then add your pages, links, etc into WordPress Menus, restart your server (don't forget to do it, otherwise, you won't be able to pull your data with GraphQL)
+
+To query menus from the REST-API, the `${Manufacturer}` is `WpApiMenus` and the `${Endpoint}` is `MenusItems`. This is the query:
+
+```javascrit
+allWordpressWpApiMenusMenusItems {
+  edges {
+    node {
+      items {
+        title
+        object_slug
+      }
+    }
+  }
+}
+```
+
+Gatsby already has a `Layout` component in `src/components/`, so it's a good place to add your menu query. Open the `layout.js` file, and inside `useStaticQuery`, past our menu query:
+
+```javascript
+const data = useStaticQuery(graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allWordpressWpApiMenusMenusItems {
+      edges {
+        node {
+          items {
+            title
+            object_slug
+          }
+        }
+      }
+    }
+  }
+`)
+```
+
+NOTE: By default, file inside src/components folder cannot accept graphQL query, but Gatsby v2.1.0 introduces a hooks version of StaticQuery called useStaticQuery, a new API that allows components to retrieve data via GraphQL query. See the full [documentation here](https://www.gatsbyjs.org/docs/use-static-query/).
+
+We can finally render the menus with React:
+
+```javascript
+<nav>
+  <ul>
+    {nav.edges[0].node.items.map((node, index) => {
+      return (
+        <li key={index}>
+          <Link to={"/" + node.object_slug}>{node.title}</Link>
+        </li>
+      )
+    })}
+  </ul>
+</nav>
+```
+
+## 7 - Build a prodution version
+
+To build a produciton version, Gatsby provide us a command who produce a directory of static HTML and JavaScript files (public folder) which you can deploy to a static site hosting service.
+
+Simply do the following command `gatsby build` at the root of the project folder.
+
+A few secondes later, Gatsby should have create a `public` folder. We will deploy this folder in the next step.
+
+## 8 - Deploy to production with Surge
+
+Surge is one of many "static site hosts" which make it possible to deploy Gatsby sites.
+
+In order to be able to use it, follow the next steps:
+
+1. Install Surge with the following command: `npm install --global surge`
+2. Then, deploy your site: `surge public/`. If it's the firsts time, you will have to create an account (don't worry, it's free!). Enter your email, password, and press enter to confirm that the path to your public/ folder is correct.
+3. Bonus: To ensure future deploys are sent to the same location, you can remember a domain. For instance, if your website was deployed to http://amazing-website.surge.sh/, run the following command: `surge --domain amazing-website.surge.sh`. The next time yo will run the `surge` command, it will deploy to the same domain.
+
+
