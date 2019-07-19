@@ -136,7 +136,7 @@ And finally, to start the development server, do:
 gatsby develop
 ```
 
-And now, your website will be available to [http://localhost:8000/](http://localhost:8000/).
+And now, your website will be available to [http://localhost:8000/](http://localhost:8000/). <br />
 :warning: If it doesn't work, you probably have to rebuild npm by doing: `npm rebuild`.
 
 ### Explore quickly what is installed
@@ -237,7 +237,7 @@ NOTE: Every time you modify this file, you will have to restart the server. Pres
 gatsby develop
 ```
 
-#### :star2: Extra2: usefull plugins
+#### :star2: Extra: usefull plugins
 
 By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so you will have to install a few plugins to your WordPress in order to be able to have those data available with GraphQL.
 
@@ -773,7 +773,12 @@ And now, your content is rendered properly!
 
 #### :star2: Extra: Create a single post
 
-In order to create single post, you will have to create a new folder in <span style="background-color: #8a4baf">src/</span> named <span style="background-color: #8a4baf">templates</span> and insite this new folder, create a file named <span style="background-color: #8a4baf">post.js</span>. And finally, paste the following code in it:
+If you want to create dynamic template, like single post, you will have to do a few more things.
+
+<details><summary>Explore how to create a single post</summary>
+<p>
+
+In order to create single post, you will have to create a new folder in <span style="background-color: #8a4baf">src/</span> named <span style="background-color: #8a4baf">templates</span> and insite this new folder, create a file named <span style="background-color: #8a4baf">post.js</span>. And, paste the following code in it:
 
 ```javascript
 import React from "react"
@@ -950,6 +955,9 @@ export default (props) => {
 
 If you now visite a single post page, you will be able to see the title, a featured image and the content. Amazing!
 
+</details>
+</p>
+
 #### :star2: Extra 2: Import Gutenberg CSS block library to Gatsby
 
 In order to apply Gutenberg block styles to your website, there is a few steps to follow.
@@ -969,7 +977,7 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 </details>
 </p>
 
-## Bonus: Pull ACF, Menus and Widgets
+## Bonus: Pull ACF and Menus
 
 ### ACF
 
