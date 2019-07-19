@@ -9,7 +9,7 @@ export default (props) => {
 
       {props.data.allWordpressPost.edges.map(post => {
         return (
-          <div key={post.node.id}>
+          <div key={post.node.id} style={{marginBottom: '50px'}}>
             <Link to={`post/${post.node.slug}`}>
               <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
             </Link>

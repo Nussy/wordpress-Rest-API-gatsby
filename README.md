@@ -59,6 +59,12 @@ With the web ecosystem steadily moving towards Javascript and React, let's talk 
 
   Instead of using NPM, you can use [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) as well.
 
+- [Install GIT](https://git-scm.com/download/mac)
+
+  Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+  You will need to be able to generate website with Gatsby.
+  :warning: If you are not able to install it, don't worry, there is a gatsby sarter available in this tutorial named `gatsby-starter`. Download it, then do the rest of the workshop inside this project.
+
 #### :star2: Extra: [Install NVM](https://github.com/nvm-sh/nvm)
 
 <details><summary>How install NVM</summary>
@@ -106,7 +112,7 @@ First, from the terminal, do:
 npm install -g gatsby-cli
 ```
 
-Then, to generate the website, choose your location then do:
+Then, to generate the website, go to your favorite location, then do:
 
 ```sh
 gatsby new workshop-wordpress-gatsby-react
@@ -118,18 +124,24 @@ Then, move to this directory
 cd workshop-wordpress-gatsby-react
 ```
 
+Install dependencies:
+
+```sh
+npm install
+```
+
 And finally, to start the development server, do:
 
 ```sh
 gatsby develop
 ```
 
-And now, your website will be available to [http://localhost:8000/](http://localhost:8000/)
-
+And now, your website will be available to [http://localhost:8000/](http://localhost:8000/).
+:warning: If it doesn't work, you probably have to rebuild npm by doing: `npm rebuild`.
 
 ### Explore quickly what is installed
 
-![Gatsby folders](/assets/gatsby-folders.png)
+![Gatsby folders](/assets/folders.png)
 
 #### Folders
 
@@ -138,11 +150,11 @@ And now, your website will be available to [http://localhost:8000/](http://local
 - **public/**: This folder is the build directory. It is also ignored by git.
 - **src/**: Here is where the magic happens. You will find everything you need to build the website inside  this folder. =>
 
-![Gatsby src folders](/assets/gatsby-src-folders.png)
+![Gatsby src folders](/assets/src-folders.png)
 
 - **components/**: they are the building blocks of any React app. It’s a JavaScript class or function that optionally accepts inputs i.e. properties(props) and returns a React element that describes how a section of the UI (User Interface) should appear.
 - **pages/**: Files in this folder become pages automatically with paths based on their file name. Here is the full [documentation](https://www.gatsbyjs.org/docs/recipes/#creating-pages).
-- **templates/**: You don't have this folder at the beginning but it will contains templates for programmatically creating pages. Here is the full [documentation](https://www.gatsbyjs.org/docs/custom-html/)
+- **templates/**: You don't have this folder at the beginning but it will contains templates for programmatically creating pages. Here is the full [documentation](https://www.gatsbyjs.org/blog/2019-05-02-how-to-build-a-blog-with-wordpress-and-gatsby-part-3/#creating-a-page-template)
 
 #### Files
 
@@ -154,9 +166,9 @@ And now, your website will be available to [http://localhost:8000/](http://local
 
 ### Create a page with Gatsby
 
-Create a page with Gatsby is very simple, any React component defined in `src/pages/*.js` will automatically become a page.
+Create a page with Gatsby is very simple, any React component defined in <span style="background-color: #8a4baf">**src/pages/*.js**</span> will automatically become a page.
 
-For instance, let's create a page called `posts.js` and past the following code into it:
+For instance, let's create a page called <span style="background-color: #8a4baf">**posts.js**</span> and past the following code into it:
 
 ```javascript
 import React from "react"
@@ -179,51 +191,53 @@ For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpres
 npm install --save gatsby-source-wordpress
 ```
 
-Once you've installed the plugin, open **gatsby-config.js** and paste the following code in the plugins array (it's part for the documentation but with only what we need):
+Once you've installed the plugin, open <span style="background-color: #8a4baf">**gatsby-config.js**</span> and paste the following code in the plugins array, at ligne 30 (it's part for the documentation but with only what we need):
 
-    {
-      resolve: "gatsby-source-wordpress",
-      options: {
-        /*
-        * The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
-        * Example : 'gatsbyjsexamplewordpress.wordpress.com' or 'www.example-site.com'
-        */
-        baseUrl: "the_wordpress_url_that_was_given_earlier",
-        // The protocol. This can be http or https.
-        protocol: "https",
-        // Indicates whether the site is hosted on wordpress.com.
-        // If false, then the assumption is made that the site is self hosted.
-        // If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
-        // If your site is hosted on wordpress.org, then set this to false.
-        hostingWPCOM: false,
-        // If useACF is true, then the source plugin will try to import the Wordpress ACF Plugin contents.
-        // This feature is untested for sites hosted on Wordpress.com.
-        // Defaults to true.
-        auth: null,
-        useACF: true, // Allows to pull ACF fields
-        // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
-        // It can help you debug specific API Endpoints problems.
-        verboseOutput: false,
-        // Exclude specific routes using glob parameters
-        // See: https://github.com/isaacs/minimatch
-        // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
-        // all routes that begin with `yoast` from fetch.
-        excludedRoutes: ["/*/*/comments", "/yoast/**"],
-        // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {
-          return entities
-        },
-      },
+```javascript
+{
+  resolve: "gatsby-source-wordpress",
+  options: {
+    /*
+    * The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
+    * Example : 'gatsbyjsexamplewordpress.wordpress.com' or 'www.example-site.com'
+    */
+    baseUrl: "wcpboston.eelab.space", // or your custom WordPress url
+    // The protocol. This can be http or https.
+    protocol: "https",
+    // Indicates whether the site is hosted on wordpress.com.
+    // If false, then the assumption is made that the site is self hosted.
+    // If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
+    // If your site is hosted on wordpress.org, then set this to false.
+    hostingWPCOM: false,
+    // If useACF is true, then the source plugin will try to import the Wordpress ACF Plugin contents.
+    // This feature is untested for sites hosted on Wordpress.com.
+    // Defaults to true.
+    auth: null,
+    useACF: true, // Allows to pull ACF fields
+    // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
+    // It can help you debug specific API Endpoints problems.
+    verboseOutput: false,
+    // Exclude specific routes using glob parameters
+    // See: https://github.com/isaacs/minimatch
+    // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
+    // all routes that begin with `yoast` from fetch.
+    excludedRoutes: ["/*/*/comments", "/yoast/**"],
+    // use a custom normalizer which is applied after the built-in ones.
+    normalizer: function({ entities }) {
+      return entities
     },
+  },
+},
+```
 
 We are now able to pull data into Gatsby from WordPress using the WordPress REST API.
-NOTE: Every time you modify this file, you will have to restart the server. Press **ctrl+c** to stop the server if it's still running, then:
+NOTE: Every time you modify this file, you will have to restart the server. Press <span style="background-color: #8a4baf">**ctrl+c**</span> to stop the server if it's still running, then:
 
 ```sh
 gatsby develop
 ```
 
-#### :star2: Extra usefull plugins
+#### :star2: Extra2: usefull plugins
 
 By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so you will have to install a few plugins to your WordPress in order to be able to have those data available with GraphQL.
 
@@ -232,7 +246,7 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 
 - **ACF**
 
-  You will have to first, set the ***useACF*** property to ***true*** from **gatsby-source-wordpress** settings in **gatsby-config.js** file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
+  You will have to first, set the ***useACF*** property to ***true*** from **gatsby-source-wordpress** settings in <span style="background-color: #8a4baf">**gatsby-config.js**</span> file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
 
 - **Menus**
 
@@ -328,12 +342,12 @@ and the GraphQL will be:
 }
 ```
 
-As you can see, the differences are the **Query Type** (***allWordpressPost*** for posts and ***allWordpressPage*** for pages) and the fields in the node object.
+As you can see, the differences are the <span style="background-color: #8a4baf">**Query Type**</span> (***allWordpressPost*** for posts and ***allWordpressPage*** for pages) and the fields in the node object.
 Doing that, you should have this result on the right:
 
 ![GraphiQL All Pages result](/assets/graphiql-all-pages.png)
 
-If you don't know which properties are available in GraphQL, you can press **Shit+Spacebar** on mac or **Ctrl+spacebar** on Windows.
+If you don't know which properties are available in GraphQL, you can press <span style="background-color: #8a4baf">**Shit+Spacebar**</span> on mac or <span style="background-color: #8a4baf">**Ctrl+spacebar**</span> on Windows.
 
 #### Example for a single post query
 
@@ -591,7 +605,7 @@ Note: When compiling your site, Gatsby preprocesses all GraphQL queries it finds
 That's why it's a good pratice to create a file who contains all your fragments and, then you call your fragments in your pages, templates, but not in your components.
 
 So, let's do it!
-Create a new file in ***components*** folder named **fragments.js**, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
+Create a new file in ***components*** folder named <span style="background-color: #8a4baf">**fragments.js**</span>, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
 
 ```javascript
 import { graphql } from 'gatsby';
@@ -615,7 +629,7 @@ By default, date will be printed as ISO-8601 format. You can format it by adding
 `date(formatString: "dddd DD MMMM YYYY")) // Week day day month year`
 
 Finally, you can use your fragments named **allPosts** in all wanted pages.
-Open your **posts.js** file and replace the previous query by calling our fragment:
+Open your <span style="background-color: #8a4baf">**posts.js**</span> file and replace the previous query by calling our fragment:
 
 ```javascript
 export const query = graphql`
@@ -669,7 +683,7 @@ So now, instead of using the ***query name*** to call your data, you will use th
 
 <img src="./assets/reactjs-logo.png" width="100" height="100">
 
-Inside the post page that we created earlier (**posts.js**), import and the **Layout** component to keep the header and footer, and wrap the h1 html tag with the new component:
+Inside the post page that we created earlier <span style="background-color: #8a4baf">**posts.js**</span>, import and the <span style="background-color: #8a4baf">**Layout**</span> component to keep the header and footer, and wrap the h1 html tag with the new component:
 
 ```javascript
 import React from "react"
@@ -688,14 +702,11 @@ If you server is still running, it should have compiled.
 
 If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
 
-Let's now display all posts title and his content! To do so, it's very simple. You first need to import **graphql** from gatsby at the top of your file:
+Let's now display all posts title and his content! To do so, it's very simple. You first need to import <span style="background-color: #8a4baf">**graphql**</span> from gatsby at the top of your file:
 
 `import { graphql } from 'gatsby'`
 
 Then after your function, you just need to export a variable who contains the graphql query:
-
-<!-- <details><summary>Show code</summary>
-<p> -->
 
 ```javascript
 export const query = graphql`
@@ -713,24 +724,18 @@ export const query = graphql`
 `
 ```
 
-<!-- </p>
-</details> -->
-
 And finally, you can update your function to display the content. Because GraphQL returns us an array, you will have to loop throught it:
-
-<!-- <details><summary>Show code</summary>
-<p> -->
 
 ```javascript
 export default (props) => {
   return (
     <Layout>
       <h1>Posts page</h1>
-      {props.data.allWordpressPost.edges.map(({node}) => {
+      {props.data.allWordpressPost.edges.map(post => {
         return (
-          <div key={node.id}>
-            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-            <p dangerouslySetInnerHTML={{ __html: node.content }} />
+          <div key={post.node.id}>
+            <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
+            <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
           </div>
         )
       })}
@@ -738,9 +743,6 @@ export default (props) => {
   )
 }
 ```
-
-<!-- </p>
-</details> -->
 
 #### What did we?
 
@@ -755,11 +757,11 @@ If you go back to the website, all posts form WordPress are displayed! But you'v
 So, your function should looks like that now:
 
 ```javascript
-{props.data.allWordpressPost.edges.map(({node}) => {
+{props.data.allWordpressPost.edges.map(post => {
   return (
-    <div key={node.id}>
-      <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-      <p dangerouslySetInnerHTML={{ __html: node.content }} />
+    <div key={post.node.id}>
+      <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
+      <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
     </div>
   )
 })}
@@ -767,9 +769,188 @@ So, your function should looks like that now:
 
 And now, your content is rendered properly!
 
-:warning: **IMPORTANT**: Only pages or template pages can define GraphQL queries. If you want to use a GraphQL query inside a component, you will have to use a hook of `StaticQuery` called `useStaticQuery`, that allows components to retrieve data via GraphQL query (we will see later how yo use it).
+:warning: <span style="background-color: #8a4baf">**IMPORTANT**</span>: Only pages or template pages can define GraphQL queries. If you want to use a GraphQL query inside a component, you will have to use a hook of `StaticQuery` called `useStaticQuery`, that allows components to retrieve data via GraphQL query (we will see later how yo use it).
 
-#### :star2: Extra: Import Gutenberg CSS block library to Gatsby
+#### :star2: Extra: Create a single post
+
+In order to create single post, you will have to create a new folder in <span style="background-color: #8a4baf">src/</span> named <span style="background-color: #8a4baf">templates</span> and insite this new folder, create a file named <span style="background-color: #8a4baf">post.js</span>. And finally, paste the following code in it:
+
+```javascript
+import React from "react"
+import Layout from "../components/layout"
+
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Post template</h1>
+    </Layout>
+  )
+}
+```
+
+Good! Now, the last think you will have to do is to use a hook from Gatsby APIs: <span style="background-color: #8a4baf">createPages</span>, and you have to do that inside the <span style="background-color: #8a4baf">gatsby-node.js</span> file. So, open this file, and first, import those two modules at the top of the file:
+
+```javascript
+const Promise = require('bluebird')
+const path = require('path')
+```
+
+Then, you can implemente the <span style="background-color: #8a4baf">createPages</span> hook by doing the following:
+
+```javascript
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  return new Promise((resolve, reject) => {
+    graphql(`
+      {
+        allWordpressPost {
+          edges {
+            node {
+              id
+              slug
+            }
+          }
+        }
+      }`
+    ).then(result => {
+      // Create posts pages.
+      result.data.allWordpressPost.edges.forEach(({ node }) => {
+        createPage({
+          path: `/post/${node.slug}/`,
+          component: path.resolve(`./src/templates/post.js`),
+          context: {
+            id: node.id,
+          },
+        })
+      })
+      resolve()
+    })
+  })
+}
+```
+
+<span style="background-color: #8a4baf">createPage</span> function belongs to <span style="background-color: #8a4baf">createPages hook</span> and it will be called by Gatsby whenever a new node is created and create a page for you. See the [documentation](https://www.gatsbyjs.org/docs/actions/#createPage) for more informations.
+
+Inside your Promise, this is where you put your wanted GraphQL query. Because we want to create a single post, we need to retrieve all posts, then loop through all of them. <span style="background-color: #8a4baf">createPage</span> function accepts a few parameters, and you will need <span style="background-color: #8a4baf">path</span>, <span style="background-color: #8a4baf">component</span>, and <span style="background-color: #8a4baf">context</span>
+
+- **path**: url of your single post. It must start with a forward slash.
+- **compoennt**: absolute path to the template that you will use to display your single post.
+
+You can find all the documentation [here](https://www.gatsbyjs.org/tutorial/part-seven/).
+
+Finally, restart your server. Don't forget to stop your server: from your terminal, press `ctr+c`, and then run the following `gatsby develop` to start it.
+
+But, we are not done yet! There is a last thing to do: add links to your posts.
+
+Open the <span style="background-color: #8a4baf">posts.js</span> file in <span style="background-color: #8a4baf">src/pages/</span> folder, then at the top of your file, import a new component from Gatsby,  <span style="background-color: #8a4baf"><Link /></span>. Because you already have imported `graphql` from gatsby, replace the former line with this one:
+
+```javascript
+import { graphql, Link } from 'gatsby'
+```
+
+The Gatsby <span style="background-color: #8a4baf"><Link /></span> component is for linking between pages within your site.
+
+Then, update your graphQL query to add the `slug` field:
+
+```javascript
+export const query = graphql`
+  query {
+    allWordpressPost {
+      edges {
+        node {
+          slug
+          id
+          title
+          content
+        }
+      }
+    }
+  }
+`
+```
+
+Finally, wrap the title with the <span style="background-color: #8a4baf"><Link /></span> component by doing the following:
+
+```javascript
+<Link to={`post/${post.node.slug}`}>
+  <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
+</Link>
+```
+
+So your function should looks like that:
+
+```javascript
+export default (props) => {
+  return (
+    <Layout>
+      <h1>Posts page</h1>
+      {props.data.allWordpressPost.edges.map(post => {
+        return (
+          <div key={post.node.id}>
+            <Link to={`post/${post.node.slug}`}>
+              <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: post.node.content }} />
+          </div>
+        )
+      })}
+    </Layout>
+  )
+}
+```
+
+Navigate now to your posts page `http://localhost:8000/posts`, and click on a title post. You should be able to see the title `Post template`.
+
+Ok! That's cool! But what if we want to display data from a single post ? Let's explore how to do that!
+
+Open your <span style="background-color: #8a4baf">post.js</span> file in <span style="background-color: #8a4baf">src/templates</span> folder, and first import <span style="background-color: #8a4baf">Layout</span> component and <span style="background-color: #8a4baf">graqhql</span> from gatsby at the top of the file:
+
+```javascript
+import { graphql } from 'gatsby'
+import Layout from "../components/layout"
+```
+
+Then, at the bottom of the page, export the following graphQL query:
+
+```javascript
+export const query = graphql`
+  query {
+    wordpressPost {
+      title
+      content
+      featured_media {
+        id
+        source_url
+        alt_text
+      }
+    }
+  }
+`
+```
+
+Because we want to display data from one post, we are using the <span style="background-color: #8a4baf">**Query Type wordpressPost**</span>. Now, title, content and the featured image are available for the front-end. Let's display them!
+
+Replace the export function with the following code:
+
+```javascript
+export default (props) => {
+  const singlePost = props.data.wordpressPost;
+
+  return (
+    <Layout>
+      <h1>{singlePost.title}</h1>
+      <img  src={singlePost.featured_media.source_url}
+            alt={singlePost.featured_media.alt_text}
+      />
+      <div dangerouslySetInnerHTML={{ __html: singlePost.content }} />
+    </Layout>
+  )
+}
+```
+
+If you now visite a single post page, you will be able to see the title, a featured image and the content. Amazing!
+
+#### :star2: Extra 2: Import Gutenberg CSS block library to Gatsby
 
 In order to apply Gutenberg block styles to your website, there is a few steps to follow.
 
@@ -838,11 +1019,11 @@ export default (props) => {
   return (
     <Layout>
       <h1>Posts page</h1>
-      {props.data.allWordpressPost.edges.map(({node}) => {
+      {props.data.allWordpressPost.edges.map(post => {
         return (
-          <div key={node.id}>
-            <h2 dangerouslySetInnerHTML={{ __html: node.title }} />
-            <p dangerouslySetInnerHTML={{ __html: node.content }} />
+          <div key={post.node.id}>
+            <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
+            <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
             <a target="_blank" rel="noopener noreferrer" href="{post.node.acf.field_url}">
               {post.node.acf.field_url}
             </a>
@@ -938,6 +1119,7 @@ In order to be able to use it, follow the next steps:
 3. Bonus: To ensure future deploys are sent to the same location, you can remember a domain. For instance, if your website was deployed to http://amazing-website.surge.sh/, run the following command: `surge --domain amazing-website.surge.sh`. The next time yo will run the `surge` command, it will deploy to the same domain.
 
 ![Amazing](https://media2.giphy.com/media/XreQmk7ETCak0/giphy.gif?cid=790b76115d2fca115763426e2e8cb7f6&rid=giphy.gif)
+
 ## Credits
 
 Logos: WordPress, Gutenberg, Gatsbyjs, Graphql, Reactjs, Surge.sh

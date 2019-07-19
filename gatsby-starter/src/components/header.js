@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
-const Header = ({ siteTitle, nav }) => (
+const Header = ({ siteTitle }) => (
   <header
     style={{
       background: `rebeccapurple`,
@@ -27,32 +27,16 @@ const Header = ({ siteTitle, nav }) => (
           {siteTitle}
         </Link>
       </h1>
-      <nav>
-        <ul>
-          {nav.edges[0].node.items.map((node, index) => {
-            return (
-              <li key={index}>
-                <Link
-                  style={{ color: `white`, textDecoration: `none` }}
-                  to={"/" + node.object_slug}
-                >
-                  {node.title}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
     </div>
   </header>
 )
 
 Header.propTypes = {
-  siteTitle: PropTypes.string
+  siteTitle: PropTypes.string,
 }
 
 Header.defaultProps = {
-  siteTitle: ``
+  siteTitle: ``,
 }
 
 export default Header
