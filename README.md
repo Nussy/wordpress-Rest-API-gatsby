@@ -836,24 +836,24 @@ exports.createPages = ({ graphql, actions }) => {
 
 <span style="background-color: #8a4baf">createPage</span> function belongs to <span style="background-color: #8a4baf">createPages hook</span> and it will be called by Gatsby whenever a new node is created and create a page for you. See the [documentation](https://www.gatsbyjs.org/docs/actions/#createPage) for more informations.
 
-Inside your Promise, this is where you put your wanted GraphQL query. Because we want to create a single post, we need to retrieve all posts, then loop through all of them. <span style="background-color: #8a4baf">createPage</span> function accepts a few parameters, and you will need <span style="background-color: #8a4baf">path</span>, <span style="background-color: #8a4baf">component</span>, and <span style="background-color: #8a4baf">context</span>
+Inside your Promise, this is where you put your wanted GraphQL query. Because we want to create a single post, we need to retrieve all posts, then loop through all of them. <span style="background-color: #8a4baf">createPage</span> function accepts a few parameters, and you will need <span style="background-color: #8a4baf">path</span> and <span style="background-color: #8a4baf">component</span>.
 
 - **path**: url of your single post. It must start with a forward slash.
-- **compoennt**: absolute path to the template that you will use to display your single post.
+- **component**: absolute path to the template that you will use to display your single post.
 
 You can find all the documentation [here](https://www.gatsbyjs.org/tutorial/part-seven/).
 
-Finally, restart your server. Don't forget to stop your server: from your terminal, press `ctr+c`, and then run the following `gatsby develop` to start it.
+Finally, restart your server. Don't forget to stop your server: from your terminal, press `ctr+c`, and then run the following command `gatsby develop` to start it.
 
 But, we are not done yet! There is a last thing to do: add links to your posts.
 
-Open the <span style="background-color: #8a4baf">posts.js</span> file in <span style="background-color: #8a4baf">src/pages/</span> folder, then at the top of your file, import a new component from Gatsby,  <span style="background-color: #8a4baf"><Link /></span>. Because you already have imported `graphql` from gatsby, replace the former line with this one:
+Open the <span style="background-color: #8a4baf">posts.js</span> file in <span style="background-color: #8a4baf">src/pages/</span> folder, then at the top of your file, import a new component from Gatsby, `<Link />`. Because you already have imported `graphql` from gatsby, replace the former line with this one:
 
 ```javascript
 import { graphql, Link } from 'gatsby'
 ```
 
-The Gatsby <span style="background-color: #8a4baf"><Link /></span> component is for linking between pages within your site.
+The Gatsby `<Link />` component is for linking between pages within your site.
 
 Then, update your graphQL query to add the `slug` field:
 
@@ -874,7 +874,7 @@ export const query = graphql`
 `
 ```
 
-Finally, wrap the title with the <span style="background-color: #8a4baf"><Link /></span> component by doing the following:
+Finally, wrap the title with the `<Link />` component by doing the following:
 
 ```javascript
 <Link to={`post/${post.node.slug}`}>
@@ -904,7 +904,7 @@ export default (props) => {
 }
 ```
 
-Navigate now to your posts page `http://localhost:8000/posts`, and click on a title post. You should be able to see the title `Post template`.
+Navigate now to your posts page `http://localhost:8000/posts`, and click on a post title. You should be able to see the title `Post template`.
 
 Ok! That's cool! But what if we want to display data from a single post ? Let's explore how to do that!
 
