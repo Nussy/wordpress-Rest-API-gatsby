@@ -166,9 +166,9 @@ And now, your website will be available to [http://localhost:8000/](http://local
 
 ### Create a page with Gatsby
 
-Create a page with Gatsby is very simple, any React component defined in <span style="background-color: #8a4baf">**src/pages/*.js**</span> will automatically become a page.
+Create a page with Gatsby is very simple, any React component defined in `src/pages/*.js` will automatically become a page.
 
-For instance, let's create a page called <span style="background-color: #8a4baf">**posts.js**</span> and past the following code into it:
+For instance, let's create a page called `posts.js` and past the following code into it:
 
 ```javascript
 import React from "react"
@@ -191,7 +191,7 @@ For that, we will have to install a new Gatsby plugin, **[gatsby-source-wordpres
 npm install --save gatsby-source-wordpress
 ```
 
-Once you've installed the plugin, open <span style="background-color: #8a4baf">**gatsby-config.js**</span> and paste the following code in the plugins array, at ligne 30 (it's part for the documentation but with only what we need):
+Once you've installed the plugin, open `gatsby-config.js` and paste the following code in the plugins array, at ligne 30 (it's part for the documentation but with only what we need):
 
 ```javascript
 {
@@ -231,7 +231,7 @@ Once you've installed the plugin, open <span style="background-color: #8a4baf">*
 ```
 
 We are now able to pull data into Gatsby from WordPress using the WordPress REST API.
-NOTE: Every time you modify this file, you will have to restart the server. Press <span style="background-color: #8a4baf">**ctrl+c**</span> to stop the server if it's still running, then:
+NOTE: Every time you modify this file, you will have to restart the server. Press `control+c` (`ctrl+c` for windows) to stop the server if it's still running, then:
 
 ```sh
 gatsby develop
@@ -246,7 +246,7 @@ By default, WordPress don't add data from ACF, Menus, WPLM... in his REST-API so
 
 - **ACF**
 
-  You will have to first, set the ***useACF*** property to ***true*** from **gatsby-source-wordpress** settings in <span style="background-color: #8a4baf">**gatsby-config.js**</span> file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
+  You will have to first, set the `useACF` property to `true` from `gatsby-source-wordpress` settings in `gatsby-config.js` file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
 
 - **Menus**
 
@@ -292,7 +292,7 @@ Basically, to query contents from WordPress, it would be very similar to:
 }
 ```
 
-where ***${Manufacturer}*** is the endpoint prefix and ***${Endpoint}*** is the name of the endpoint from the WordPress URL:
+where `${Manufacturer}` is the endpoint prefix and `${Endpoint}` is the name of the endpoint from the WordPress URL:
 
 `https://wcpboston.eelab.space/wp-json/${Manufacturer}/v2/${Endpoint}`
 
@@ -317,7 +317,7 @@ and the GraphQL will be:
 }
 ```
 
-It's almost exactly the same for pages, except that the ***${Endpoint}*** is different:
+It's almost exactly the same for pages, except that the `${Endpoint}` is different:
 
 `https://wcpboston.eelab.space/wp-json/wp/v2/pages`
 
@@ -342,12 +342,12 @@ and the GraphQL will be:
 }
 ```
 
-As you can see, the differences are the <span style="background-color: #8a4baf">**Query Type**</span> (***allWordpressPost*** for posts and ***allWordpressPage*** for pages) and the fields in the node object.
+As you can see, the differences are the `Query Type` (`allWordpressPost` for posts and `allWordpressPage` for pages) and the fields in the node object.
 Doing that, you should have this result on the right:
 
 ![GraphiQL All Pages result](/assets/graphiql-all-pages.png)
 
-If you don't know which properties are available in GraphQL, you can press <span style="background-color: #8a4baf">**Shit+Spacebar**</span> on mac or <span style="background-color: #8a4baf">**Ctrl+spacebar**</span> on Windows.
+If you don't know which properties are available in GraphQL, you can press `Shit+Spacebar` on mac or `Ctrl+spacebar` on Windows.
 
 #### Example for a single post query
 
@@ -605,7 +605,7 @@ Note: When compiling your site, Gatsby preprocesses all GraphQL queries it finds
 That's why it's a good pratice to create a file who contains all your fragments and, then you call your fragments in your pages, templates, but not in your components.
 
 So, let's do it!
-Create a new file in ***components*** folder named <span style="background-color: #8a4baf">**fragments.js**</span>, then import **graphql** library, and finally create your fragments based with our previous example. Don't forget to export it.
+Create a new file in `components` folder named `fragments.js`, then import `graphql` library, and finally create your fragments based with our previous example. Don't forget to export it.
 
 ```javascript
 import { graphql } from 'gatsby';
@@ -628,8 +628,8 @@ By default, date will be printed as ISO-8601 format. You can format it by adding
 
 `date(formatString: "dddd DD MMMM YYYY")) // Week day day month year`
 
-Finally, you can use your fragments named **allPosts** in all wanted pages.
-Open your <span style="background-color: #8a4baf">**posts.js**</span> file and replace the previous query by calling our fragment:
+Finally, you can use your fragments named `allPosts` in all wanted pages.
+Open your `posts.js` file and replace the previous query by calling our fragment:
 
 ```javascript
 export const query = graphql`
@@ -683,7 +683,7 @@ So now, instead of using the ***query name*** to call your data, you will use th
 
 <img src="./assets/reactjs-logo.png" width="100" height="100">
 
-Inside the post page that we created earlier <span style="background-color: #8a4baf">**posts.js**</span>, import and the <span style="background-color: #8a4baf">**Layout**</span> component to keep the header and footer, and wrap the h1 html tag with the new component:
+Inside the post page that we created earlier `posts.js`, import and the `Layout` component to keep the header and footer, and wrap the h1 html tag with the new component:
 
 ```javascript
 import React from "react"
@@ -702,7 +702,7 @@ If you server is still running, it should have compiled.
 
 If you go back to the website, you should be able to visit this page: [http://localhost:8000/posts](http://localhost:8000/posts)
 
-Let's now display all posts title and his content! To do so, it's very simple. You first need to import <span style="background-color: #8a4baf">**graphql**</span> from gatsby at the top of your file:
+Let's now display all posts title and his content! To do so, it's very simple. You first need to import `graphql` from gatsby at the top of your file:
 
 `import { graphql } from 'gatsby'`
 
@@ -735,7 +735,7 @@ export default (props) => {
         return (
           <div key={post.node.id}>
             <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
-            <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
+            <div dangerouslySetInnerHTML={{ __html: post.node.content }} />
           </div>
         )
       })}
@@ -761,7 +761,7 @@ So, your function should looks like that now:
   return (
     <div key={post.node.id}>
       <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
-      <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
+      <div dangerouslySetInnerHTML={{ __html: post.node.content }} />
     </div>
   )
 })}
@@ -769,7 +769,7 @@ So, your function should looks like that now:
 
 And now, your content is rendered properly!
 
-:warning: <span style="background-color: #8a4baf">**IMPORTANT**</span>: Only pages or template pages can define GraphQL queries. If you want to use a GraphQL query inside a component, you will have to use a hook of `StaticQuery` called `useStaticQuery`, that allows components to retrieve data via GraphQL query (we will see later how yo use it).
+:warning: **IMPORTANT**: Only pages or template pages can define GraphQL queries. If you want to use a GraphQL query inside a component, you will have to use a hook of `StaticQuery` called `useStaticQuery`, that allows components to retrieve data via GraphQL query (we will see later how yo use it).
 
 #### :star2: Extra: Create a single post
 
@@ -778,7 +778,7 @@ If you want to create dynamic template, like single post, you will have to do a 
 <details><summary>Explore how to create a single post</summary>
 <p>
 
-In order to create single post, you will have to create a new folder in <span style="background-color: #8a4baf">src/</span> named <span style="background-color: #8a4baf">templates</span> and insite this new folder, create a file named <span style="background-color: #8a4baf">post.js</span>. And, paste the following code in it:
+In order to create single post, you will have to create a new folder in `src/` named `templates` and insite this new folder, create a file named `post.js`. And, paste the following code in it:
 
 ```javascript
 import React from "react"
@@ -793,14 +793,14 @@ export default (props) => {
 }
 ```
 
-Good! Now, the last think you will have to do is to use a hook from Gatsby APIs: <span style="background-color: #8a4baf">createPages</span>, and you have to do that inside the <span style="background-color: #8a4baf">gatsby-node.js</span> file. So, open this file, and first, import those two modules at the top of the file:
+Good! Now, the last think you will have to do is to use a hook from Gatsby APIs: `createPages`, and you have to do that inside the `gatsby-node.js` file. So, open this file, and first, import those two modules at the top of the file:
 
 ```javascript
 const Promise = require('bluebird')
 const path = require('path')
 ```
 
-Then, you can implemente the <span style="background-color: #8a4baf">createPages</span> hook by doing the following:
+Then, you can implemente the `createPages` hook by doing the following:
 
 ```javascript
 exports.createPages = ({ graphql, actions }) => {
@@ -834,9 +834,9 @@ exports.createPages = ({ graphql, actions }) => {
 }
 ```
 
-<span style="background-color: #8a4baf">createPage</span> function belongs to <span style="background-color: #8a4baf">createPages hook</span> and it will be called by Gatsby whenever a new node is created and create a page for you. See the [documentation](https://www.gatsbyjs.org/docs/actions/#createPage) for more informations.
+`createPage` function belongs to `createPages hook` and it will be called by Gatsby whenever a new node is created and create a page for you. See the [documentation](https://www.gatsbyjs.org/docs/actions/#createPage) for more informations.
 
-Inside your Promise, this is where you put your wanted GraphQL query. Because we want to create a single post, we need to retrieve all posts, then loop through all of them. <span style="background-color: #8a4baf">createPage</span> function accepts a few parameters, and you will need <span style="background-color: #8a4baf">path</span> and <span style="background-color: #8a4baf">component</span>.
+Inside your Promise, this is where you put your wanted GraphQL query. Because we want to create a single post, we need to retrieve all posts, then loop through all of them. `createPage` function accepts a few parameters, and you will need `path` and `component`.
 
 - **path**: url of your single post. It must start with a forward slash.
 - **component**: absolute path to the template that you will use to display your single post.
@@ -847,7 +847,7 @@ Finally, restart your server. Don't forget to stop your server: from your termin
 
 But, we are not done yet! There is a last thing to do: add links to your posts.
 
-Open the <span style="background-color: #8a4baf">posts.js</span> file in <span style="background-color: #8a4baf">src/pages/</span> folder, then at the top of your file, import a new component from Gatsby, `<Link />`. Because you already have imported `graphql` from gatsby, replace the former line with this one:
+Open the `posts.js` file in `src/pages/` folder, then at the top of your file, import a new component from Gatsby, `<Link />`. Because you already have imported `graphql` from gatsby, replace the former line with this one:
 
 ```javascript
 import { graphql, Link } from 'gatsby'
@@ -908,11 +908,10 @@ Navigate now to your posts page `http://localhost:8000/posts`, and click on a po
 
 Ok! That's cool! But what if we want to display data from a single post ? Let's explore how to do that!
 
-Open your <span style="background-color: #8a4baf">post.js</span> file in <span style="background-color: #8a4baf">src/templates</span> folder, and first import <span style="background-color: #8a4baf">Layout</span> component and <span style="background-color: #8a4baf">graqhql</span> from gatsby at the top of the file:
+Open your `post.js` file in `src/templates` folder, and import `graqhql` from gatsby at the top of the file:
 
 ```javascript
 import { graphql } from 'gatsby'
-import Layout from "../components/layout"
 ```
 
 Then, at the bottom of the page, export the following graphQL query:
@@ -933,7 +932,7 @@ export const query = graphql`
 `
 ```
 
-Because we want to display data from one post, we are using the <span style="background-color: #8a4baf">**Query Type wordpressPost**</span>. Now, title, content and the featured image are available for the front-end. Let's display them!
+Because we want to display data from one post, we are using the `Query Type wordpressPost`. Now, title, content and the featured image are available for the front-end. Let's display them!
 
 Replace the export function with the following code:
 
@@ -966,10 +965,10 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 <p>
 
 1. First, stop the development server if it's still running:<br/>
-`ctrl + c`.
-2. Then retrieve the CSS file in **/wp-includes/css/dist/block-library** named **style.min.css**.
-3. Then Create a folder named **styles** in ***src/*** and put the ***style.min.css*** file from WordPress
-4. Then, in ***gatsby-browser.js*** file, import this file with this line:<br/>
+`control+c` or `ctrl + c` for windows.
+2. Then retrieve the CSS file in `/wp-includes/css/dist/block-library` named `style.min.css`.
+3. Then Create a folder named **styles** in `src/` and put the `style.min.css` file from WordPress
+4. Then, in `gatsby-browser.js` file, import this file with this line:<br/>
 `import "./src/styles/block-library.min.css";`
 5. Finally, restart the development server:<br/>
 `gatsby develop`
@@ -981,9 +980,9 @@ In order to apply Gutenberg block styles to your website, there is a few steps t
 
 ### ACF
 
-You will have to first, set the `useACF` property to `true` from `gatsby-source-wordpress` settings in **gatsby-config.js** file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
+You will have to first, set the `useACF` property to `true` from `gatsby-source-wordpress` settings in `gatsby-config.js` file, and secondly, have the plugin [acf-to-rest-api](https://github.com/airesvsg/acf-to-rest-api) installed in WordPress.
 
-Then, restart your server (`ctrl+c` to stop it, then `gatsby develop` to start it).
+Then, restart your server (`control+c` or `ctrl+c` for windows, to stop it, then `gatsby develop` to start it).
 
 Let's use the following example:
 
