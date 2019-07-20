@@ -1030,7 +1030,7 @@ export default (props) => {
         return (
           <div key={post.node.id}>
             <h2 dangerouslySetInnerHTML={{ __html: post.node.title }} />
-            <p dangerouslySetInnerHTML={{ __html: post.node.content }} />
+            <div dangerouslySetInnerHTML={{ __html: post.node.content }} />
             <a target="_blank" rel="noopener noreferrer" href="{post.node.acf.field_url}">
               {post.node.acf.field_url}
             </a>
