@@ -347,7 +347,7 @@ Doing that, you should have this result on the right:
 
 ![GraphiQL All Pages result](/assets/graphiql-all-pages.png)
 
-If you don't know which properties are available in GraphQL, you can press `Shit+Spacebar` on mac or `Ctrl+spacebar` on Windows.
+If you don't know which properties are available in GraphQL, you can press `Shift+Spacebar` on mac or `Ctrl+spacebar` on Windows.
 
 #### Example for a single post query
 
