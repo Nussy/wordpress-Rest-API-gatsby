@@ -18,10 +18,18 @@
   - [Deploy to production with Surge](#deploy-to-production-with-surge)
   - [Credits](#credits)
 
-# Make your WordPress Rest API queries easy with GraphQL and Gatsby
 
-With the web ecosystem steadily moving towards Javascript and React, let's talk about GraphQL as an easier way to make WP Rest API queries. During this session, we will discuss how to pull, sort, organize and optimize your content from WordPress to React using GraphQL, the data query language developed by Facebook.
+# How to build a static WordPress website with GatsbyJS, GraphQL and ReactJS
 
+With the web ecosystem steadily moving towards JAMstacks, JavaScript framework and serverless apps, we created this tutorial to help you build a static WordPress website with GatsbyJS, GraphQL and ReactJS.
+
+Each step of the tutorial will go through the basics and also includes extra details in case you want to dive deeper.
+
+You can also checkout the "workshop-wordpress-gatsby-react" folder to see the final results of the tutorial.
+
+Feel free to suggest with improvements and updates, and contribute to this training repository.
+
+@WordPress #HeadlessCMS @GatsbyJS @GraphQL @ReactJS @SurgeSH
 
 ![Gatsby folders](https://media3.giphy.com/media/wi8Ez1mwRcKGI/giphy.gif?cid=790b76115d2fc47f366d694f36f7bac7&rid=giphy.gif)
 
