@@ -31,7 +31,7 @@ Feel free to suggest with improvements and updates, and contribute to this train
 
 @WordPress #HeadlessCMS @GatsbyJS @GraphQL @ReactJS @SurgeSH
 
-![Gatsby folders](https://media3.giphy.com/media/wi8Ez1mwRcKGI/giphy.gif?cid=790b76115d2fc47f366d694f36f7bac7&rid=giphy.gif)
+![Gatsby folders](http://giphygifs.s3.amazonaws.com/media/a5viI92PAF89q/giphy.gif)
 
 ## Requirements
 
