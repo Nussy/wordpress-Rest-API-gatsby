@@ -1,3 +1,5 @@
+![Gatsby folders](https://github.com/Nussy/wordpress-Rest-API-gatsby/blob/master/assets/Title.png?raw=true)
+
 - [Make your WordPress Rest API queries easy with GraphQL and Gatsby](#make-your-wordpress-rest-api-queries-easy-with-graphql-and-gatsby)
   - [Requirements](#requirements)
   - [WordPress](#wordpress)
@@ -32,6 +34,7 @@ Feel free to suggest with improvements and updates, and contribute to this train
 @WordPress #HeadlessCMS @GatsbyJS @GraphQL @ReactJS @SurgeSH
 
 ![Gatsby folders](http://giphygifs.s3.amazonaws.com/media/a5viI92PAF89q/giphy.gif)
+
 
 ## Requirements
 
